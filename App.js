@@ -16,7 +16,7 @@ app.use("/api/v1/users",userRegistrationRouter)
 app.use(errorHandlerMiddleware)
  dbInitialization().then((res,err)=>{
    console.log(err)
-   app.listen(3020,()=>{
+   app.listen(process.env.PORT,()=>{
   console.log('server active on port 3020')
 })
  }).catch(err=>{
