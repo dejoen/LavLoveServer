@@ -5,6 +5,7 @@ let errorHandlerMiddleware = require('./middleware/errorHandlerMiddleware.js')
 let dotenv = require('dotenv').config()
 let bodyParser = require('body-parser')
 let userRegistrationRouter = require('./features/userRegistration/route/userRegistrationRoute.js')
+let userLoginRouter = require('./features/userLogin/route/LoginRoute.js')
 let cors = require('cors')
 
 //app.use(bodyParser())
@@ -12,6 +13,8 @@ app.use(cors())
 app.use(bodyParser.json({urlencoded:true}))
 app.use("/api/v1/users",userRegistrationRouter)
 
+app.use("/api/v1/users",
+userLoginRouter)
 
 app.use(errorHandlerMiddleware)
  dbInitialization().then((res,err)=>{

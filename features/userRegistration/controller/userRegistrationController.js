@@ -9,7 +9,7 @@ let memory = new nodeCache({stdTTL:0, checkperiod:1})
 
 
 let registerUser = async(req,res,next)=>{
-await Users.deleteMany()
+
   const {username,email, password} = req.body
   if(!username || !email || !password){
     res.status(400).json({
@@ -87,7 +87,7 @@ await Users.deleteMany()
      await  saveUser.save()
      
      if(saveUser){
-       console.log(saveUser)
+      
     const token=jwt.sign(saveUser._doc,process.env.SECRET_KEY,{expiresIn:"30d"})
      
       res.status(200).json({
@@ -95,7 +95,7 @@ await Users.deleteMany()
         message:"successfully signed up to lav love app welcome onboard ",
        user:{...saveUser._doc,token}
       })
-    
+    memory.del(email)
      }
      
        }catch(err){
